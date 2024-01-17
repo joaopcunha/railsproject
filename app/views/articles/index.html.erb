@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Artigos</h1>
+<% if @articles.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.title %></td>
+          <td><%= article.description %></td>
+          <td><%= button_to "Show", article_path(article), method: :get, form_method: :get  %></td>
+          <td><%= button_to "Edit", edit_article_path(article), method: :get, form_method: :get  %></td>
+          <td><%= button_to "Delete", article, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<p>Nenhum artigo criado</p>
+<% end %>
+<%= button_to "Create new article", new_article_path, method: :get, form_method: :get   %>
+
